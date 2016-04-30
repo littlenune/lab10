@@ -2,7 +2,7 @@ package coinmachine;
 /**
  * A Coin represents metalic money with a value.
  */
-public class Coin /*TODO implements Comparable<Coin> */ {
+public class Coin implements Comparable {
 	/** value of the coin */
 	private final int value;
 	private final String currency;
@@ -53,17 +53,18 @@ public class Coin /*TODO implements Comparable<Coin> */ {
 		result = prime * result + value;
 		return result;
 	}
-
 	/**
 	 * Two coins are equal if they have the same currency and value.
 	 * @param obj an Object to compare to this coin.
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
-	public boolean equals(Object obj) {
-//TODO Write a correct equals method for Coin.
+//	@Override
+	public boolean equals(Coin obj) {
+		if ( this.currency.equals(obj.getCurrency()) && this.value == obj.getValue() ){
+			return true;
+		}
+		return false;
 //     You can assume that the currency is never null.
-		return this == obj;
 	}
 
 	/**
@@ -72,5 +73,20 @@ public class Coin /*TODO implements Comparable<Coin> */ {
 	@Override
 	public String toString() {
 		return value+"-"+currency;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		int compareNum= 0;
+		if ( this.getValue() > ((Coin) o).getValue()){
+			compareNum =1;
+		}
+		else if ( this.getValue() == ((Coin) o).getValue()){
+			compareNum = 0;
+		}
+		else if ( this.getValue() < ((Coin) o).getValue()){
+			compareNum = -1;
+		}
+		return compareNum;
 	}
 }

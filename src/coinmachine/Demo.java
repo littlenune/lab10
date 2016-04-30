@@ -1,4 +1,5 @@
 package coinmachine;
+import java.awt.EventQueue;
 import java.util.Scanner;
 
 /**
@@ -60,8 +61,24 @@ public class Demo {
 		final int capacity = 10;  // how many coins the machine can hold
 		
 		CoinMachine machine = new CoinMachine( capacity );
+		CoinMachineObserver coinMachineObserver = new CoinMachineObserver( );
 		Demo demo = new Demo();
-		//TODO add observers
+		machine.addObserver(coinMachineObserver);
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BalanceStatusObserver balanceObserver = new BalanceStatusObserver( machine);
+					machine.addObserver(balanceObserver);
+					balanceObserver.setVisible(true);
+					CoinCountObserver coinCountObserver = new CoinCountObserver( machine );
+					machine.addObserver(coinCountObserver);
+					coinCountObserver.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		demo.insertDialog(machine);
 	}
 }
