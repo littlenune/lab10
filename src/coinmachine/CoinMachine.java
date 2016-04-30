@@ -18,6 +18,7 @@ public class CoinMachine extends Observable {
 	
 	/** 
 	 * Create a new coin machine with a fixed capacity.
+	 * @param capacity
 	 */
 	public CoinMachine( int capacity ) {
 		this.capacity = capacity;
@@ -55,7 +56,7 @@ public class CoinMachine extends Observable {
 	 *  If the coin is invalid, throw an exception.
 	 *  @param m is a coin object to insert. Must not be null.
 	 *  @return true if coins successfully added, false if failure (machine full)
-	 *  @throws 
+	 *  @throws exveption when value is negative.
 	 */
 	public boolean insert( Coin m ) {
 		if ( isFull() ) return false;

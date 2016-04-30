@@ -58,7 +58,7 @@ public class Demo {
 	 * @param args not used
 	 */
 	public static void main(String[] args) {
-		final int capacity = 10;  // how many coins the machine can hold
+		final int capacity = 20;  // how many coins the machine can hold
 		
 		CoinMachine machine = new CoinMachine( capacity );
 		CoinMachineObserver coinMachineObserver = new CoinMachineObserver( );

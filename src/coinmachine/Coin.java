@@ -57,6 +57,7 @@ public class Coin implements Comparable {
 	 * Two coins are equal if they have the same currency and value.
 	 * @param obj an Object to compare to this coin.
 	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @return Return true if the currency and values of two objects are equal.
 	 */
 //	@Override
 	public boolean equals(Coin obj) {
@@ -68,13 +69,16 @@ public class Coin implements Comparable {
 	}
 
 	/**
-	 * @see java.lang.Object#toString()
+	 * Return string of value and currency.
 	 */
 	@Override
 	public String toString() {
 		return value+"-"+currency;
 	}
-
+/*
+ * This will compare the value of two coins and will arrangement it in lower and greater.
+ * @return position of it.
+ */
 	@Override
 	public int compareTo(Object o) {
 		int compareNum= 0;
