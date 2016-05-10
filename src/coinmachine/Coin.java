@@ -2,7 +2,7 @@ package coinmachine;
 /**
  * A Coin represents metalic money with a value.
  */
-public class Coin implements Comparable {
+public class Coin implements Comparable<Coin> {
 	/** value of the coin */
 	private final int value;
 	private final String currency;
@@ -15,7 +15,7 @@ public class Coin implements Comparable {
 	public Coin(int value) {
 		this(value, "Baht");
 	}
-	
+
 	public Coin(int value, String currency) {
 		assert value > 0;  // if not, its YOUR fault
 		if (currency == null) throw new IllegalArgumentException("currency cannot be null");
@@ -29,13 +29,13 @@ public class Coin implements Comparable {
 	public int getValue() {
 		return value;
 	}
-	
+
 	/**
 	 * Get the coin's currency.
 	 * @return the currency of this coin.
 	 */
 	public String getCurrency() { return currency; }
-	
+
 
 	/**
 	 * Hashcode is used by collections like HashSet and HashMap.
@@ -59,13 +59,18 @@ public class Coin implements Comparable {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 * @return Return true if the currency and values of two objects are equal.
 	 */
-//	@Override
-	public boolean equals(Coin obj) {
-		if ( this.currency.equals(obj.getCurrency()) && this.value == obj.getValue() ){
-			return true;
+	//	@Override
+	public boolean equals(Object obj) {
+		if ( obj instanceof Coin){
+			Coin coin = (Coin) obj;
+			if ( coin.getValue() == this.getValue() && coin.getCurrency().equals(this.getCurrency()))
+			{
+				return true;
+			}
 		}
+
 		return false;
-//     You can assume that the currency is never null.
+		//     You can assume that the currency is never null.
 	}
 
 	/**
@@ -75,22 +80,23 @@ public class Coin implements Comparable {
 	public String toString() {
 		return value+"-"+currency;
 	}
-/*
- * This will compare the value of two coins and will arrangement it in lower and greater.
- * @return position of it.
- */
+	/*
+	 * This will compare the value of two coins and will arrangement it in lower and greater.
+	 * @return position of it.
+	 */
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(Coin o) {
 		int compareNum= 0;
-		if ( this.getValue() > ((Coin) o).getValue()){
+		if ( this.getValue() > o.getValue()){
 			compareNum =1;
 		}
-		else if ( this.getValue() == ((Coin) o).getValue()){
+		else if ( this.getValue() == o.getValue()){
 			compareNum = 0;
 		}
-		else if ( this.getValue() < ((Coin) o).getValue()){
+		else if ( this.getValue() < o.getValue()){
 			compareNum = -1;
 		}
 		return compareNum;
 	}
+
 }
